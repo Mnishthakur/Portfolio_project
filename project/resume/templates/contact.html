@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<style>
+    /* Keep existing styles from previous contact.html */
+    .contact-section {
+        padding: 4rem 0;
+        background: var(--section-bg);
+    }
+
+    .contact-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 1rem 0;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Add social links styling */
+    .social-links a {
+        color: var(--primary-dark);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .social-links a:hover {
+        color: var(--accent-blue);
+        transform: translateX(5px);
+    }
+</style>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="category-title">Get in Touch</h2>
+            <p class="lead">Let's connect and create something amazing!</p>
+        </div>
+
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-md-6">
+                <div class="contact-card">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-md-6">
+                <div class="contact-card">
+                    <div class="contact-info-item">
+                        <i class="fas fa-envelope"></i>
+                        <h5>Email</h5>
+                        <p class="social-links">
+                            <a href="mailto:mnish771@gmail.com">mnish771@gmail.com</a>
+                        </p>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fab fa-linkedin"></i>
+                        <h5>LinkedIn</h5>
+                        <p class="social-links">
+                            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">
+                                linkedin.com/in/yourprofile
+                            </a>
+                        </p>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fab fa-github"></i>
+                        <h5>GitHub</h5>
+                        <p class="social-links">
+                            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                                github.com/yourusername
+                            </a>
+                        </p>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fab fa-twitter"></i>
+                        <h5>Twitter</h5>
+                        <p class="social-links">
+                            <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer">
+                                @yourhandle
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I\'ll respond within 24 hours.');
+        this.reset();
+    });
+</script>
+
+{% endblock %}

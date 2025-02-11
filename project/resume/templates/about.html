@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --primary-dark: #2c3e50;
+        --accent-blue: #3498db;
+        --professional-teal: #2ecc71;
+        --text-light: #ffffff;
+        --section-bg: #f8f9fa;
+    }
+
+    .about-hero {
+        background: var(--section-bg);
+        padding: 6rem 0 4rem;
+        min-height: 100vh;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background: var(--accent-blue);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+    }
+
+    .timeline-item {
+        padding: 20px 40px;
+        position: relative;
+        width: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: -10px;
+        background: var(--accent-blue);
+        border: 3px solid var(--professional-teal);
+        top: 30px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .left {
+        left: 0;
+    }
+
+    .right {
+        left: 50%;
+    }
+
+    .certification-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .certification-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .skill-bar {
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .skill-progress {
+        height: 100%;
+        background: var(--professional-teal);
+        width: 0;
+        transition: width 1s ease;
+    }
+
+    .skill-item:hover .skill-progress {
+        width: 100%;
+    }
+</style>
+
+<section class="about-hero">
+    <div class="container">
+        <h1 class="text-center mb-5">About Manish Thakur</h1>
+        
+        <!-- Professional Journey -->
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content card p-4">
+                    <h3>Professional Journey</h3>
+                    <p class="text-muted">2021 - Present</p>
+                    <ul>
+                        <li>Process Associate specializing in Python automation</li>
+                        <li>Developed 15+ workflow automation scripts</li>
+                        <li>SQL database optimization expert</li>
+                        <li>Implemented Django-based internal tools</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content card p-4">
+                    <h3>Education</h3>
+                    <p class="text-muted">2017 - 2021</p>
+                    <ul>
+                        <li>Bachelor's in Computer Science</li>
+                        <li>Specialized in Database Systems</li>
+                        <li>Coursework in Algorithms & Data Structures</li>
+                        <li>Final Project: Inventory Management System</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="row my-5">
+            <div class="col-md-4">
+                <div class="certification-card">
+                    <h5><i class="fas fa-certificate text-warning"></i> Python Certification</h5>
+                    <p>Advanced Python Programming</p>
+                    <small>Issued: 2022 | Python Institute</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="certification-card">
+                    <h5><i class="fas fa-certificate text-info"></i> SQL Mastery</h5>
+                    <p>Database Design & Optimization</p>
+                    <small>Issued: 2023 | SQL University</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="certification-card">
+                    <h5><i class="fas fa-certificate text-success"></i> Django Fundamentals</h5>
+                    <p>Web Development Framework</p>
+                    <small>Issued: 2023 | Django Academy</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="card p-4 mb-4">
+                    <h4 class="mb-4">Technical Proficiency</h4>
+                    <div class="skill-item mb-4">
+                        <h6>Python Development <span class="float-end">85%</span></h6>
+                        <div class="skill-bar">
+                            <div class="skill-progress"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <h6>Django Framework <span class="float-end">75%</span></h6>
+                        <div class="skill-bar">
+                            <div class="skill-progress"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <h6>SQL Database <span class="float-end">90%</span></h6>
+                        <div class="skill-bar">
+                            <div class="skill-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h4 class="mb-4">Professional Philosophy</h4>
+                    <p class="lead">"Efficiency through intelligent automation"</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-check text-success me-2"></i>
+                            Focus on scalable solutions
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-check text-success me-2"></i>
+                            Continuous learning mindset
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-check text-success me-2"></i>
+                            Data-driven decision making
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-check text-success me-2"></i>
+                            Clean & maintainable code
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Animate skill bars on scroll
+    const animateSkills = () => {
+        const skills = document.querySelectorAll('.skill-progress');
+        skills.forEach(skill => {
+            const rect = skill.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                skill.style.width = skill.parentElement.previousElementSibling.querySelector('span').innerText;
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateSkills);
+    window.addEventListener('load', animateSkills);
+
+    // Timeline hover effect
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Certification card hover
+    document.querySelectorAll('.certification-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+{% endblock %}

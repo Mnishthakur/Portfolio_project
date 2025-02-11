@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --primary-dark: #2c3e50;
+        --accent-blue: #3498db;
+        --professional-teal: #2ecc71;
+        --text-light: #ffffff;
+        --section-bg: #f8f9fa;
+    }
+
+    .project-category {
+        margin: 4rem 0;
+        padding: 2rem 0;
+    }
+
+    .project-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin: 1rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        overflow: hidden;
+        min-height: 300px;
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .project-details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(44, 62, 80, 0.95);
+        color: white;
+        padding: 2rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .project-card:hover .project-details {
+        opacity: 1;
+    }
+
+    .tech-badge {
+        background: var(--accent-blue);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin: 0.2rem;
+        display: inline-block;
+    }
+
+    .category-title {
+        border-left: 4px solid var(--professional-teal);
+        padding-left: 1rem;
+        margin-bottom: 2rem;
+    }
+</style>
+
+<section class="project-category">
+    <div class="container">
+        <!-- Data Analysis Projects -->
+        <h2 class="category-title">Data Analysis Projects</h2>
+        <div class="row">
+            <!-- Project 1 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>Sales Trend Analyzer</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Pandas</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>Analyzed 50K+ sales records</li>
+                            <li>Identified market trends</li>
+                            <li>Created predictive models</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 2 months</small><br>
+                            <strong>Impact:</strong> 25% sales improvement
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>Customer Segmentation</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Scikit-learn</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>Clustered 10K customers</li>
+                            <li>RFM analysis implementation</li>
+                            <li>Dashboard integration</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 6 weeks</small><br>
+                            <strong>Impact:</strong> 30% better targeting
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>Inventory Optimization</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">Tableau</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>Reduced stockouts by 40%</li>
+                            <li>ABC analysis implementation</li>
+                            <li>Real-time tracking</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 3 months</small><br>
+                            <strong>Impact:</strong> $150K cost savings
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>Financial Forecasting</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Prophet</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>Time series analysis</li>
+                            <li>95% accuracy model</li>
+                            <li>Automated reporting</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 2 months</small><br>
+                            <strong>Impact:</strong> Better budget planning
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Development Projects -->
+        <h2 class="category-title mt-5">Development Projects</h2>
+        <div class="row">
+            <!-- Project 1 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>Task Management System</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Django</span>
+                        <span class="tech-badge">React</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>Real-time updates</li>
+                            <li>User authentication</li>
+                            <li>REST API backend</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 3 months</small><br>
+                            <strong>Impact:</strong> 40% productivity boost
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>E-commerce Platform</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Django</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>Payment gateway integration</li>
+                            <li>Inventory management</li>
+                            <li>Order tracking system</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 4 months</small><br>
+                            <strong>Impact:</strong> $500K+ annual sales
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>API Integration Hub</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">FastAPI</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>10+ third-party API integrations</li>
+                            <li>Rate limiting</li>
+                            <li>JWT authentication</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 2 months</small><br>
+                            <strong>Impact:</strong> Reduced integration time by 60%
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="col-md-3">
+                <div class="project-card">
+                    <h4>Automation Framework</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Selenium</span>
+                    </div>
+                    <div class="project-details">
+                        <h5>Key Features:</h5>
+                        <ul>
+                            <li>15+ automated workflows</li>
+                            <li>Error handling system</li>
+                            <li>Reporting dashboard</li>
+                        </ul>
+                        <p class="mt-auto">
+                            <small>Duration: 1 month</small><br>
+                            <strong>Impact:</strong> Saved 120 hours/month
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Mobile touch support
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            if(window.innerWidth < 768) {
+                this.classList.toggle('show-details');
+            }
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,492 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --primary-blue: #2A6B8F;
+        --accent-teal: #2EBA9A;
+        --dark-charcoal: #2C3E50;
+        --light-gray: #F8F9FA;
+    }
+
+    .hero-section {
+        background: var(--light-gray);
+        padding: 8rem 0 4rem;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .name-headline {
+        font-size: 4.5rem;
+        font-weight: 700;
+        color: var(--dark-charcoal);
+        margin-bottom: 1.5rem;
+        letter-spacing: -1.5px;
+    }
+
+    .expertise-tagline {
+        font-size: 2.2rem;
+        color: var(--primary-blue);
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+
+    .key-skills {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+    }
+
+    .skill-pill {
+        background: var(--accent-teal);
+        color: white;
+        padding: 0.6rem 1.5rem;
+        border-radius: 20px;
+        font-size: 1.1rem;
+    }
+
+    .achievement-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 4rem;
+    }
+
+    .achievement-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+    }
+
+    .achievement-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stats-section {
+        background: var(--dark-charcoal);
+        color: white;
+        padding: 5rem 0;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--accent-teal);
+    }
+
+/* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .hero-section {
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .name-headline {
+        animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .expertise-tagline {
+        animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+
+    .skill-pill {
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .skill-pill:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(46, 186, 154, 0.3);
+    }
+
+    .achievement-card {
+        transition: all 0.3s ease;
+    }
+
+    .achievement-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+    .stat-number {
+        transition: transform 0.3s ease;
+    }
+
+    .stat-number:hover {
+        transform: scale(1.1);
+    }
+
+    .cta-button {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .cta-button::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(255,255,255,0.1);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .cta-button:hover::after {
+        opacity: 1;
+    }
+
+    /* Join Team Section */
+    .join-team {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(45deg, var(--primary-blue), var(--dark-charcoal));
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .join-team:hover {
+        transform: scale(1.02);
+    }
+
+    .join-team::before {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        pointer-events: none;
+    }
+    .skill-item {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+
+  .skill-details {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary-blue);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      z-index: 100;
+  }
+
+  .skill-item:hover .skill-details {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-10px);
+  }
+
+  .skill-mastery {
+      height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+      position: relative;
+  }
+
+  .mastery-progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: var(--accent-teal);
+      width: 0;
+      transition: width 0.5s ease;
+  }
+
+  .skill-item:hover .mastery-progress {
+      width: 100%;
+  }
+
+  .skill-details::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--primary-blue) transparent transparent transparent;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="name-headline">Manish Thakur</h1>
+            <h2 class="expertise-tagline">
+                Python Developer | Database Specialist | Process Optimization
+            </h2>
+            
+            <div class="key-skills justify-content-center">
+                <div class="skill-pill">Python</div>
+                <div class="skill-pill">Django</div>
+                <div class="skill-pill">SQL</div>
+                <div class="skill-pill">Automation</div>
+                <div class="skill-pill">API Development</div>
+            </div>
+
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <h3>2+ Years Experience</h3>
+                    <p>Building enterprise-grade solutions</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>15+ Projects</h3>
+                    <p>Successful implementations</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>40% Efficiency Gain</h3>
+                    <p>Through process automation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technical Showcase Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-5">
+                <div class="stat-number">2000+</div>
+                <h4>Lines of Python Code</h4>
+                <p>Written for production systems</p>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="stat-number">98%</div>
+                <h4>Query Optimization</h4>
+                <p>SQL performance improvement</p>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="stat-number">15</div>
+                <h4>Automated Workflows</h4>
+                <p>Developed & implemented</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technical Expertise Section -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center mb-5">Technical Mastery</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title">Core Development</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="badge bg-primary me-3">Python</div>
+                                    <span>Scripting | Automation | Backend Development</span>
+                                </div>
+                            </li>
+                            <li class="mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="badge bg-success me-3">Django</div>
+                                    <span>Web Applications | REST APIs | ORM</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title">Database Expertise</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="badge bg-info me-3">SQL</div>
+                                    <span>Query Optimization | Schema Design | Data Analysis</span>
+                                </div>
+                            </li>
+                            <li class="mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="badge bg-warning me-3">ETL</div>
+                                    <span>Data Pipelines | Migration | Transformation</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="join-team text-center py-5 my-5">
+  <div class="container">
+      <h2 class="mb-4">Want Me on Your Team?</h2>
+      <p class="lead mb-4">Let's build something amazing together</p>
+      <div class="d-flex gap-3 justify-content-center">
+          <a href="#contact" class="cta-button btn btn-lg btn-primary px-5 py-3">
+              <i class="fas fa-handshake me-2"></i>
+              Hire Me
+          </a>
+          <a href="{% static 'files/resume.pdf' %}" download 
+             class="cta-button btn btn-lg btn-outline-light px-5 py-3">
+              <i class="fas fa-file-download me-2"></i>
+              Download CV
+          </a>
+      </div>
+  </div>
+</div>
+
+<section class="skills-section">
+  <div class="container">
+      <h2 class="text-center mb-5">Technical Arsenal</h2>
+      <div class="row">
+          <!-- Core Competencies -->
+          <div class="col-md-4">
+              <div class="skill-card">
+                  <h3 class="skill-title">Core Competencies</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">Strong problem-solving and analytical skills</li>
+                      <li class="skill-item">Proficient in Python with experience in Django and Flask</li>
+                      <li class="skill-item">Expertise in API development and integration (RESTful APIs)</li>
+                      <li class="skill-item">Data analysis and visualization using Pandas, NumPy, Matplotlib, and Power BI</li>
+                      <li class="skill-item">Process automation and ETL pipelines</li>
+                      <li class="skill-item">Software development best practices, version control (Git), and debugging</li>
+                      <li class="skill-item">Strong understanding of Agile methodologies</li>
+                  </ul>
+              </div>
+          </div>
+
+          <!-- Web Development -->
+          <div class="col-md-4">
+              <div class="skill-card">
+                  <h3 class="skill-title">Web Development</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">Proficient in Django, Flask, and FastAPI for backend development</li>
+                      <li class="skill-item">Experience with frontend technologies: HTML, CSS, JavaScript, Bootstrap</li>
+                      <li class="skill-item">API development and third-party integrations</li>
+                      <li class="skill-item">Authentication & Authorization (OAuth, JWT, Django Authentication)</li>
+                      <li class="skill-item">Deployment and server management (AWS, Heroku, Docker)</li>
+                      <li class="skill-item">Web scraping with BeautifulSoup & Selenium</li>
+                  </ul>
+              </div>
+          </div>
+
+          <!-- Database Expertise -->
+          <div class="col-md-4">
+              <div class="skill-card">
+                  <h3 class="skill-title">Database Expertise</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">Relational Databases: MySQL, PostgreSQL</li>
+                      <li class="skill-item">NoSQL Databases: MongoDB</li>
+                      <li class="skill-item">Writing optimized SQL queries, stored procedures, and triggers</li>
+                      <li class="skill-item">Database modeling, indexing, and performance tuning</li>
+                      <li class="skill-item">ORM frameworks: Django ORM, SQLAlchemy</li>
+                      <li class="skill-item">Data migration and schema design</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<script>
+  // Add smooth scroll functionality
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+          });
+      });
+  });
+
+  // Add scroll animation triggers
+  const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.achievement-card, .skill-pill');
+      elements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.8) {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+          }
+      });
+  };
+
+  window.addEventListener('scroll', animateOnScroll);
+  window.addEventListener('load', animateOnScroll);
+
+  // Add hover effect to stats numbers
+  document.querySelectorAll('.stat-number').forEach(number => {
+      number.addEventListener('mouseover', () => {
+          number.style.transform = 'scale(1.1)';
+      });
+      number.addEventListener('mouseout', () => {
+          number.style.transform = 'scale(1)';
+      });
+  });
+  // Add smooth animation for tooltip entry
+  document.querySelectorAll('.skill-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+          const details = this.querySelector('.skill-details');
+          details.style.display = 'block';
+          setTimeout(() => {
+              details.style.opacity = '1';
+              details.style.visibility = 'visible';
+              details.style.transform = 'translateX(-50%) translateY(-10px)';
+          }, 10);
+      });
+
+      item.addEventListener('mouseleave', function() {
+          const details = this.querySelector('.skill-details');
+          details.style.opacity = '0';
+          details.style.visibility = 'hidden';
+          details.style.transform = 'translateX(-50%) translateY(0)';
+      });
+  });
+</script>
+{% endblock %}
